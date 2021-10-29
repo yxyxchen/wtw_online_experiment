@@ -1,19 +1,19 @@
-# Willingness-to-wait Task
+# An Experimentation Portal to Run the Willingness-to-wait Task
 
 by Yixin Chen, 2021/06/17
 
 
 ## 1. Welcome
-This repo contains task code of the willingness-to-wait (WTW) paradigm (McGuire and Kable, 2012 and 2015). You can use it to run either in-person or web-based experiments. You can modify the task scripts to control multiple aspects of your experiment (e.g., the total duration of a block, task condition in each block, and more). 
+This repository contains the task code to run the willingness-to-wait (WTW) paradigm (McGuire and Kable, 2012 and 2015). You can use it to run either in-person or web-based experiments. You can modify the task scripts to control multiple aspects of your experiments (e.g., the total duration of a block, task condition in each block, and more). 
 
 
 ## 2. Introduction of the WTW task
 
 **Feel free to skip this section if you are familiar with the WTW task.**
 
-The WTW task is a computer-based paradigm to study adaptive calibration of persistence in uncertain environments(McGuire and Kable, 2012 and 2015, Fig.1). On each trial, a token appears on the screen and it will mature after a random delay. Participants could either wait for the token, or sell it anytime and initialize a new trial. Their goal is to maximize total rewards in a fixed period of time. 
+The WTW task is a computer-based paradigm to study adaptive calibration of persistence in uncertain environments(McGuire and Kable, 2012 and 2015, Fig.1). On each trial, a token appears on the screen and it will mature after a random delay. Participants could either wait for the token, or sell it anytime and initialize a new trial. Their goal is to maximize total rewards in a fixed period. 
 
-There are two environments with different distributions of delay durations, in favor of either high persistence (**HP**) or limited persistence (**LP**). The central prediction of this paradigm is that decision makers are able to calibrate their persistence level in a context-appropriate manner, exhibiting higher persistence level in the HP environemnt compared to the LP environment. 
+There are two environments with different distributions of delay durations, in favor of either high persistence (**HP**) or limited persistence (**LP**). The central prediction of this paradigm is that decision makers can calibrate their persistence level in a context-appropriate manner, exhibiting higher persistence level in the HP environemnt compared to in the LP environment. 
 
 The paradigm has three variants. In the **active-waiting** variant, participants continuously press a key to wait for a token and release the key to sell the token. In the **passive-waiting** variant, participants do nothing while waiting and press a key to sell the token. In the **rising-falling** variant, a trial either delivers a gain or loss.
 
@@ -30,7 +30,7 @@ The paradigm has three variants. In the **active-waiting** variant, participants
 
 
 
-## 3. Repo content
+## 3. Repository content
 The willingness-to-wait task is written in JavaScript with jsPsych (de Leeuw, 2015, https://www.jspsych.org/). 
 
 #### 3.1 HTML files
@@ -69,7 +69,7 @@ python parse_local_data.py original_csv_path destination_directory_path
 ## 4. In-person WTW experiments 
 
 #### 4.1 Setup
-First, get a copy of this repo on your local PC. There are multiple ways to do so (see https://docs.github.com/en/get-started/quickstart/fork-a-repo for additional information). The simplest way is to go to the repo page (https://gitlab.pavlovia.org/cdlab/wtw_template) and click the download button.
+First, get a copy of this repository on your local PC. There are multiple ways to do so (see https://docs.github.com/en/get-started/quickstart/fork-a-repo for additional information). The simplest way is to go to the repository page (https://gitlab.pavlovia.org/cdlab/wtw_template) and click the download button.
 
 <table align="center"><tr><td align="center" width="9999">
 <img align="center" width="700" src="img/download.png">
@@ -89,13 +89,13 @@ git pull origin master
 
 Choose the in-person task variant you want to run, say the active-waiting variant. Open the corresponding homepage, <span style="color:IndianRed">local_active_index.html</span> in this case, in a browser to launch the experiment. The webpage will ask you to enter a participant ID. It is then followed by a tutorial session with four practice trials, and the real task.
 
-By default, the task contains two 10-min blocks, the first one in the HP environment and the second one in the LP environment. The token is initially worth 0 cents and will be worth 2 cents after a random delay. In the HP environment, the delay is drawn from 8 possible values evenly spaced over 0-12 s. In the LP environment, the delay is drawn from 8 possible values logarithmically spaced over 0-24 s. **The delay sequence is preprogrammed 
+By default, the task contains two 10-min blocks, the first one in the LP environment and the second one in the HP environment. The token is initially worth 0 cents and will be worth 2 cents after a random delay. In the HP environment, the delay is drawn from 8 possible values evenly spaced over 0-12 s. In the LP environment, the delay is drawn from 8 possible values logarithmically spaced over 0-24 s. **The delay sequence is preprogrammed 
 into the script and therefore the same for every participant.**
 
 #### 4.2 Data 
 Once a participant completes the task, a csv file is automatically saved to the browser's default downloads folder, usually <span style="color:IndianRed">Downloads</span>. The file is named with the following format: *wtw_local-raw_participantID_date.csv*
 
-The csv file saves participant's choice data in the raw jsPsych format. Please relocate it to the <span style="color:IndianRed">local_data</span> folder and run the python script, <span style="color:IndianRed">parse_local_data.py</span>, to convert it to a readable format and save it at a destination folder of your choice:
+The csv file saves the participant's choice data in the raw jsPsych format. Please relocate it to the <span style="color:IndianRed">local_data</span> folder and run the python script, <span style="color:IndianRed">parse_local_data.py</span>, to convert it to a readable format and save it at a destination folder of your choice:
 
 ```bash
 python parse_local_data.py original_csv_path destination_directory
@@ -106,13 +106,13 @@ The eventual csv file includes the following variables:
 - **condition**: HP or LP
 - **scheduledDelay**: how long a token is scheduled to mature, in s
 - **scheduledReward**: the scheduled maturation value. Only for rising-falling variants.
-- **RT**: reaction time for the participant to respond to a matured token, in s. NaN if the token is sold before it matrues
+- **RT**: reaction time to respond to a matured token, in s. NaN if the token is sold before it matrues
 - **timeWaited**: how long the participant waits for a token, in s
 - **trialEarnings**: trial-wise earnings in cents
 - **totalEarnings**: accumulative earnings in cents
-- **sellTime**: when the participant sells the token
-- **trialStartTime**: when a trial *actually* starts and the delay starts to count down. In active-waiting variants, The trial actually starts after participants respond to a "Ready" signal. 
-- **trialReadyTime**: when the "Ready" signal appears. Only for active-wating variants. 
+- **sellTime**: when a token is sold
+- **trialStartTime**: when a trial *actually* starts and the delay starts to count down. In active-waiting variants, the trial actually starts after participants respond to a "Ready" signal 
+- **trialReadyTime**: when the "Ready" signal appears, only for active-wating variants
 
 
 ## 5. Web-based WTW experiments 
@@ -120,7 +120,7 @@ The eventual csv file includes the following variables:
 #### 5.1 Setup 
 We recommend deloying your web-based WTW experiments on Pavlovia(https://pavlovia.org/). To start, you need to fork this repo to your Pavlovia-affiliated Gitlab account. 
 
-The simplest way to do so is to go to the repo page (https://gitlab.pavlovia.org/cdlab/wtw_template), click the fork button, and confirm to fork it under your namespace. If you want to sync your fork with the original repository, see https://docs.github.com/en/get-started/quickstart/fork-a-repo. 
+The simplest way to do so is to go to the repository page (https://gitlab.pavlovia.org/cdlab/wtw_template), click the fork button, and confirm to fork it under your namespace. If you want to sync your fork with the original repository, see https://docs.github.com/en/get-started/quickstart/fork-a-repo. 
 
 <table align="center"><tr><td align="center" width="9999">
 <img align="center" width="700" src="img/fork.png">
@@ -141,7 +141,7 @@ Choose the variant of web-based experiments you want to run. **Then change the n
 
 
 #### 5.2 Pilot and run web-based experiments
-On the Experiment page, you can set the status of your experiment, "inactive", "piloting", or "running". 
+On the Experiment page, you can set the status of your experiment as "inactive", "piloting", or "running". 
 
 
 #### 5.3 Distribute the task URL 
@@ -151,7 +151,7 @@ Whatever approach your choose, it is important to send each participant a unique
 
 
 #### 5.4 Buddle your task with Qualtric surveys
-It is convenient to include informaed consent and self-report measures in a Qualtric survey. To buddle a survey with your task, simply add the task URL to the end of the survey. You can use Qualtrics' Embedded-Data function (see https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) to create participant-specific task URLs. 
+It is convenient to include a consent form and self-report measures in a Qualtric survey. To buddle a survey with your task, simply add the task URL to the end of the survey. You can use Qualtrics' Embedded-Data function (see https://www.qualtrics.com/support/survey-platform/survey-module/survey-flow/standard-elements/embedded-data/) to create participant-specific task URLs. 
 
 #### 5.5 Payment
 On most recruitment platforms, participants need to enter a secret key to redeem their payment. You can modify the HTML file to display the secret key at the end of the task. CloudResearch also enables you to generate a unique secret key for each participant (see cloudresearch.com/resources/blog/dynamic-secret-completion-codes-for-surveymonkey/) and pay a performance-based bonus (see https://www.cloudresearch.com/resources/blog/how-to-award-a-bonus-to-mturk-workers-using-turkprime/)
