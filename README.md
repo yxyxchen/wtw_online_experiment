@@ -18,14 +18,15 @@ There are two environments with different distributions of delay durations, in f
 The paradigm has three variants. In the **active-waiting** variant, participants continuously press a key to wait for a token and release the key to sell the token. In the **passive-waiting** variant, participants do nothing while waiting and press a key to sell the token. In the **rising-falling** variant, a trial either delivers a gain or loss.
 
 
+<img align="center" width="300" src="img/schematics.png">
 
-<table align="center"><tr><td align="center" width="9999">
+<!-- <table align="center"><tr><td align="center" width="9999">
 <img align="center" width="300" src="img/schematics.png">
 
 
 **Fig.1 Schematics of the WTW task**
 
-</td></tr></table>
+</td></tr></table> -->
 
 
 
