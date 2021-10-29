@@ -1,0 +1,218 @@
+/*
+ * CSS for the wtw task
+ *
+ */
+
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+
+/*
+ * PLUGIN: jspsych-wtw-trial
+ */
+#jspsych-wtw-content {
+  position: relative;
+}
+
+
+#jspsych-wtw-token {
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid grey;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: grey;
+}
+
+/*#jspsych-wtw-HP-immature-token {
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid white;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: Green;
+}
+
+#jspsych-wtw-LP-immature-token {
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid white;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: #7D3C98;
+}
+
+#jspsych-wtw-HP-mature-token {
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid white;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: #a4d246;
+}
+
+#jspsych-wtw-LP-mature-token {
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid white;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: #CCCCFF;
+}
+*/
+
+
+#jspsych-wtw-cent-text {
+  position: absolute;
+  bottom: 145px;
+  right: 55px;
+  color: white;
+  font-size: 120px;
+  text-align: center;
+}
+
+
+#jspsych-wtw-sold-text {
+  position: absolute;
+  bottom: 135px;
+  right: -50px;
+  color: red;
+  font-size: 150px;
+  text-align: center;
+}
+
+#jspsych-wtw-ready-text {
+  position: absolute;
+  bottom: 400px;
+  right: 0px;
+  color: white;
+  font-size: 35px;
+  text-align: center;
+}
+
+/*#jspsych-wtw-10cent-text {
+  position: absolute;
+  bottom: 145px;
+  right: 55px;
+  color: white;
+  font-size: 120px;
+  text-align: center;
+}
+
+#jspsych-wtw-0cent-text {
+  position: absolute;
+  bottom: 145px;
+  right: 80px;
+  color: white;
+  font-size: 120px;
+  text-align: center;
+}
+
+
+/*#jspsych-wtw-total-back{
+  width: 300px;
+  height: 300px;
+  border-radius:300px;
+  border:3px solid grey ;  
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  background: Grey;
+}*/
+
+#jspsych-wtw-total {
+  position: absolute;
+  width: 500px;
+  height: 80px;
+  bottom: -280px;
+  right: -100px;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+#jspsych-wtw-left-time {
+  position: absolute;
+  width: 500px;
+  height: 80px;
+  bottom: -220px;
+  right: -100px;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+#jspsych-wtw-progress {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom: -100px;
+  right: 0px;
+  background-color: white;
+}
+
+#jspsych-wtw-trial-timer {
+  position: absolute;
+  width: 1%;
+  height: 30px;
+  bottom: -97px;
+  left: 0%;
+  background-color: white;
+}
+
+#jspsych-wtw-trial-timer-head {
+  position: absolute;
+  width: 2%;
+  height: 40px;
+  bottom: -103px;
+  left: 0%;
+  background-color: black;
+}
+
+
+#jspsych-wtw-bar {
+  position: absolute;
+  width: 1%;
+  height: 24px;
+  bottom: -97px;
+  left: 0%;
+  background-color: #a6bddb;
+}
+
+#jspsych-wtw-bar-left-text {
+  position: absolute;
+  bottom: -70px;
+  left: -20px;
+  color: white;
+  font-size: 20px;
+  text-align: left;
+}
+
+#jspsych-wtw-bar-right-text {
+  position: absolute;
+  bottom: -70px;
+  right: -20px;
+  color: white;
+  font-size: 20px;
+  text-align: right;
+}
+
+#button {
+  background-color: "grey"; 
+  border: 1px;
+  color: black;
+  padding: 10px 16px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

@@ -1,0 +1,216 @@
+<!-- /*
+* working experiment
+*/ -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Decision Making Experiment</title>
+    <!--packages loaded on the pavlovia cluster-->
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/jspsych.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/vendors/jspsych-6.0.0/css/jspsych.css"/>
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="lib/vendors/jspsych-6.0.0/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="lib/vendors/jspsych-6.0.0/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="lib/jspsych-pavlovia-3.0.0.js"></script>
+    <!--scripts loaded for the local PC-->
+    <!--<script type="text/javascript" src="jspsych/jspsych.js"></script>
+    <link rel="stylesheet" type="text/css" href="jspsych/css/jspsych.css"/>
+    <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-survey-text.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-survey-multi-choice.js"></script>-->
+    <!--packages always loaded-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
+    <!--customized packages always loaded-->
+    <link rel="stylesheet" type="text/css" href="wtw/wtw.css"/>
+    <script src="wtw/wtw-rising-falling-prac.js"></script>
+    <script src="wtw/wtw-rising-falling-block.js"></script>
+    <script src="wtw/instructions.js"></script>
+    <script src="wtw/instructions_text.js"></script> 
+  </head>
+  <body></body> 
+  <p id = "demo"></p>
+  <script>
+    // for online experiments, get experiment info for the URL
+    var workerId = jsPsych.data.getURLVariable("workerId")
+    if(workerId == undefined){
+      workerId = "unknown"
+    }
+    var assignmentId = jsPsych.data.getURLVariable("assignmentId")
+    if(assignmentId == undefined){
+      assignmentId = "unknown"
+    }
+    var hitId = jsPsych.data.getURLVariable("hitId")
+    if(hitId == undefined){
+      hitId == "unknown"
+    }
+    
+    /* init connection with pavlovia.org */
+    var pavlovia_init = {
+      type: "pavlovia",
+      command: "init"
+    };
+    
+    // change color settings 
+    var change_colors = {
+      type: 'call-function',
+      func: function(){
+        $('.jspsych-display-element').css('background-color', 'grey')
+        $('.jspsych-display-element').css('color', 'white')
+      }
+    }
+
+    // instructions1
+    var instructions_1 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_1a_text, rising_falling_instructions_1b_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true
+    }
+
+    // practice_1_a
+    var practice_1 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_1',
+      instruction: "mature",
+      iti: 1000
+    }
+
+    var instructions_2 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_2_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_2
+    var practice_2 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_2',
+      instruction: "mature",
+      iti: 1000
+    }
+
+    var instructions_3 = {
+      type: "instructions",
+      pages: [instructions_3_text],  // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_3
+    var practice_3 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_3',
+      instruction: "immature",
+      iti: 1000
+    }
+
+    // instructions 4
+    var instructions_4 = {
+      type: "instructions",
+      pages: [instructions_4_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_4
+    var practice_4 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_4',
+      instruction: "immature",
+      iti: 1000
+    }
+
+    var instructions_5 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_5_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    var mid_quit_warning = {
+      type: "instructions",
+      pages: [mid_quit_warning_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // rising block 
+    var wtw_rising_falling_block = {
+        type: "wtw-rising-falling-block",
+        block_time: 1000 * 60 * 20,
+        transition_time: 1000 * 60 * 10,
+        iti: 1000
+    }
+
+    // store exp info 
+    jsPsych.data.addProperties({
+      workerId: workerId,
+      assignmentId: assignmentId,
+      hitId: hitId
+    })
+
+    // debriefing 
+    var debriefing = {
+      type: "instructions",
+      pages: function(){
+          var earnObj = jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).select('totalEarnings')
+          var earnings = earnObj.values[0]
+          return(['<p style="color: white; font-size: 30px; line-height: 2">You earned a bonus of ' + earnings[earnings.length - 1]/100 + '&#36 in this decision-making game. </p>' + 
+      '<p style="color: white; font-size: 30px; line-height: 2">Click "Next" to upload your data.</p>'])},
+      key_forward: "j",
+      key_backward: "f",
+      button_label_next: "Next",
+      show_clickable_nav: true
+    }
+
+    /* finish connection with pavlovia.org */
+    var pavlovia_finish = {
+      type: "pavlovia",
+      command: "finish",
+      participantId: workerId
+    };
+
+    /* start the experiment. Comment the following chunk when testing locally */
+    jsPsych.init({
+      timeline: [pavlovia_init, change_colors, instructions_1, practice_1, instructions_2, practice_2, instructions_3, practice_3, instructions_4, practice_4, instructions_5, mid_quit_warning, wtw_rising_falling_block, debriefing, pavlovia_finish],
+      on_finish:function (){
+        document.body.innerHTML = '<p style="color: white; font-size: 30px; line-height: 2"> Uploading data now.</p>'
+        setTimeout(function(){document.body.innerHTML = '<p style="color: white; font-size: 30px; line-height: 2"> Data successfully uploaded. You can close the tab now.</p>'}, 5000)
+      }
+    });
+
+    /* test the experiment locally and disply the output at the end. Uncomment the following chunk when testing locally */
+    // jsPsych.init({
+    //   timeline: [change_colors, instructions_1, practice_1, instructions_2, practice_2, instructions_3, practice_3, instructions_4, practice_4, instructions_5, wtw_rising_falling_block, debriefing],
+    //   on_finish: function() {
+    //     jsPsych.data.displayData();
+    //   }
+    // });
+
+  </script>
+</html>

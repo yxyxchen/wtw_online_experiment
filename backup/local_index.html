@@ -1,0 +1,262 @@
+<!-- /*
+* working experiment
+*/ -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Decision Making Experiment</title>
+    <!--scripts loaded for the local PC-->
+    <script type="text/javascript" src="jspsych/jspsych.js"></script>
+    <link rel="stylesheet" type="text/css" href="jspsych/css/jspsych.css"/>
+    <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-survey-text.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-survey-multi-choice.js"></script>
+    <!--packages always loaded-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
+    <!--customized packages always loaded-->
+    <link rel="stylesheet" type="text/css" href="wtw/wtw.css"/>
+    <script src="wtw/wtw-rising-falling-prac.js"></script>
+    <script src="wtw/wtw-rising-falling-block.js"></script>
+    <script src="wtw/instructions.js"></script>
+    <script src="wtw/instructions_text.js"></script> 
+  </head>
+  <body></body> 
+  <p id = "demo"></p>
+  <script>
+    // for in-person experiments, ask experimenters to enter experimental info 
+    var id_prompt = {
+      type: 'survey-text',
+      questions: [
+        {prompt: "Participant ID"}
+      ]
+    };
+    
+    // change color settings 
+    var change_colors = {
+      type: 'call-function',
+      func: function(){
+        $('.jspsych-display-element').css('background-color', 'grey')
+        $('.jspsych-display-element').css('color', 'white')
+      }
+    }
+
+    // instructions1
+    var instructions_1 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_1a_text, rising_falling_instructions_1b_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true
+    }
+
+    // practice_1_a
+    var practice_1 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_1',
+      instruction: "mature",
+      iti: 1000
+    }
+
+    var instructions_2 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_2_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_2
+    var practice_2 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_2',
+      instruction: "mature",
+      iti: 1000
+    }
+
+    var instructions_3 = {
+      type: "instructions",
+      pages: [instructions_3_text],  // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_3
+    var practice_3 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_3',
+      instruction: "immature",
+      iti: 1000
+    }
+
+    // instructions 4
+    var instructions_4 = {
+      type: "instructions",
+      pages: [instructions_4_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_4
+    var practice_4 = {
+      type: 'wtw-rising-falling-prac',
+      scheduled_delay: 5000,
+      scheduled_reward: 8,
+      trial_id: 'prac_4',
+      instruction: "immature",
+      iti: 1000
+    }
+
+    var instructions_5 = {
+      type: "instructions",
+      pages: [rising_falling_instructions_5_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+
+    ////////////////// define the task block ############################
+    // some variables 
+    var block_time = 1000 * 15
+    var transition_time = 1000 * 7
+    var iti = 1000
+    var miniblock_duration = 1000 * 5
+    var get_block_start_time = function(){
+      return jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).last(1).values()[0]['block_start_time']
+    }
+    var get_initial_earnings = function(){
+      return jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).last(1).values()[0]['total_earnings']
+    }
+    var get_starting_trial_count = function(){
+      return jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).last(1).values()[0]['trial_count']
+    }
+    var get_starting_condition = function(){
+      console.log(jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).last(1).values()[0]['condition'])
+      return jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).last(1).values()[0]['condition']
+    }
+
+    var wtw_rising_falling_miniblock1 = {
+        type: "wtw-rising-falling-block",
+        block_idx: 1,
+        block_time: block_time,
+        transition_time: transition_time,
+        iti: iti,
+        miniblock_time: miniblock_duration * 1,
+        initial_earnings: 0,
+        starting_trial_count: 0,
+        starting_condition: "LP", 
+        block_start_time: new Date().getTime()
+    }
+
+    var wtw_rising_falling_miniblock2 = {
+        type: "wtw-rising-falling-block",
+        block_idx: 1,
+        block_time: block_time,
+        transition_time: transition_time,
+        iti: iti,
+        miniblock_time: miniblock_duration * 2,
+        initial_earnings: function(){
+          return get_initial_earnings()
+        },
+        starting_trial_count: function(){
+           return get_starting_trial_count()
+        },
+        starting_condition: function(){
+          return get_starting_condition()
+        },
+        block_start_time: function(){
+          return get_block_start_time()
+        }
+    }
+
+    var wtw_rising_falling_miniblock3 = {
+        type: "wtw-rising-falling-block",
+        block_idx: 1,
+        block_time: block_time,
+        transition_time: transition_time,
+        iti: iti,
+        miniblock_time: miniblock_duration * 3,
+        initial_earnings: function(){
+          console.log(get_initial_earnings())
+          return get_initial_earnings()
+        },
+        starting_trial_count: function(){
+          console.log(get_starting_trial_count())
+          return get_starting_trial_count()
+        },
+        starting_condition: function(){
+          return get_starting_condition()
+        },
+        block_start_time: function(){
+          return get_block_start_time()
+        }
+    }
+
+    // debriefing 
+    var debriefing = {
+      type: "instructions",
+      pages: function(){
+          var earnObj = jsPsych.data.get().filter({trial_type: 'wtw-rising-falling-block'}).select('totalEarnings')
+          var earnings = earnObj.values[0]
+          return(['<p style="color: white; font-size: 30px; line-height: 2">You earned a bonus of ' + earnings[earnings.length - 1]/100 +
+      '&#36 in this decision-making game. </p>' + 
+      '<p style="color: white; font-size: 30px; line-height: 2">Please click "Exit" to exit this experiment.</p>'])},
+      key_forward: "j",
+      key_backward: "f",
+      button_label_next: "Exit",
+      show_clickable_nav: true
+    }
+
+    // if leave the page middleway, save the data. 
+    var quit_midway_save = function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+        // jsPsych.data.displayData();
+        var tmp = JSON.parse(jsPsych.data.get().filter({trial_type: 'survey-text'}).select("responses").values);
+        var id = tmp['Q0']
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + "-" + mm + "-" + dd;
+        jsPsych.data.get().localSave('csv', `wtw_local-raw_${id}_${today}.csv`); // the name of the file should include 
+    }
+    window.addEventListener('beforeunload', quit_midway_save);
+
+
+    /* start the experiment */
+    jsPsych.init({
+      timeline: [change_colors, id_prompt, wtw_rising_falling_miniblock1, wtw_rising_falling_miniblock2, wtw_rising_falling_miniblock3, debriefing],
+      on_finish: function() {
+        window.removeEventListener('beforeunload', quit_midway_save) 
+        // jsPsych.data.displayData();
+        var tmp = JSON.parse(jsPsych.data.get().filter({trial_type: 'survey-text'}).select("responses").values);
+        var id = tmp['Q0']
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + "-" + mm + "-" + dd;
+        jsPsych.data.get().localSave('csv', `wtw_local-raw_${id}_${today}.csv`); // the name of the file should include important info of this exp 
+        document.body.innerHTML = '<p style="color: white; font-size: 30px; line-height: 2">Please notify the experimentor.</p>'
+      }
+    });
+
+  </script>
+</html>

@@ -1,0 +1,247 @@
+<!-- /*
+* working experiment
+*/ -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Decision Making Experiment</title>
+    <!--packages loaded on the pavlovia cluster-->
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/jspsych.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/vendors/jspsych-6.0.0/css/jspsych.css"/>
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="lib/vendors/jspsych-6.0.0/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="lib/vendors/jspsych-6.0.0/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="lib/vendors/jspsych-6.0.0/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="lib/jspsych-pavlovia-3.0.0.js"></script>
+    <!--scripts loaded for the local PC. Uncomment the following chunk when testing locally -->
+    <!--<script type="text/javascript" src="jspsych/jspsych.js"></script>
+    <link rel="stylesheet" type="text/css" href="jspsych/css/jspsych.css"/>
+    <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-call-function.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>-->
+    <!--packages always loaded-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
+    <!--customized packages always loaded-->
+    <link rel="stylesheet" type="text/css" href="wtw/wtw.css"/>
+    <script src="wtw/wtw-active-block.js"></script>
+    <script src="wtw/wtw-passive-prac.js"></script>
+    <script src="wtw/wtw-active-prac.js"></script>
+    <script src="wtw/wtw-passive-block.js"></script>
+    <script src="wtw/instructions_text.js"></script> 
+    <script src="wtw/instructions.js"></script>
+  </head>
+  <body></body> 
+  <p id = "demo"></p>
+  <script>
+  
+    // for online experiments, get experiment info for the URL
+    var workerId = jsPsych.data.getURLVariable("workerId")
+    if(workerId == undefined){
+      workerId = "unknown"
+    }
+    var assignmentId = jsPsych.data.getURLVariable("assignmentId")
+    if(assignmentId == undefined){
+      assignmentId = "unknown"
+    }
+    var hitId = jsPsych.data.getURLVariable("hitId")
+    if(hitId == undefined){
+      hitId == "unknown"
+    }
+    
+    /* init connection with pavlovia.org */
+    var pavlovia_init = {
+      type: "pavlovia",
+      command: "init"
+    };
+
+    // change color settings 
+    var change_colors = {
+      type: 'call-function',
+      func: function(){
+        $('.jspsych-display-element').css('background-color', 'grey')
+        $('.jspsych-display-element').css('color', 'white')
+      }
+    }
+
+    // instructions1
+    var instructions_1 = {
+      type: "instructions",
+      pages: [active_instructions_1a_text, active_instructions_1b_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true
+    }
+
+    // practice_1_a
+    // change type to "wtw-passive-prac" to run the passive waiting version
+    var practice_1 = {
+      type: 'wtw-active-prac',
+      scheduled_delay: 5000,
+      trial_id: 'prac_1',
+      maturation_value: 2,
+      instruction: "mature",
+      iti: 500
+    }
+
+    var instructions_2 = {
+      type: "instructions",
+      pages: [active_instructions_2_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_2
+    // change type to "wtw-passive-prac" to run the passive waiting version
+    var practice_2 = {
+      type: 'wtw-active-prac',
+      scheduled_delay: 5000,
+      trial_id: 'prac_2',
+      maturation_value: 2,
+      instruction: "mature",
+      iti: 500
+    }
+
+    var instructions_3 = {
+      type: "instructions",
+      pages: [instructions_3_text],
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_3
+    // change type to "wtw-passive-prac" to run the passive waiting version
+    var practice_3 = {
+      type: 'wtw-active-prac',
+      scheduled_delay: 5000,
+      trial_id: 'prac_3',
+      maturation_value: 2,
+      instruction: "immature",
+      iti: 500
+    }
+
+    // instructions 4
+    var instructions_4 = {
+      type: "instructions",
+      pages: [instructions_4_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // practice_4
+    // change type to "wtw-passive-prac" to run the passive waiting version
+    var practice_4 = {
+      type: 'wtw-active-prac',
+      scheduled_delay: 5000,
+      trial_id: 'prac_4',
+      maturation_value: 2,
+      instruction: "immature",
+      iti: 500
+    }
+
+    var instructions_5 = {
+      type: "instructions",
+      pages: [instructions_5_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    var mid_quit_warning = {
+      type: "instructions",
+      pages: [mid_quit_warning_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true,
+    }
+
+    // LP block
+    // change type to "wtw-passive-block" to run the passive waiting version
+    var wtw_LP_block = {
+        type: "wtw-active-block",
+        condition: "LP",
+        block_time: 1000 * 60 * 10,
+        maturation_value: 2,
+        iti: 500
+    }
+
+    var instructions_6 = {
+      type: "instructions",
+      pages: [instructions_6_text], // loaded from wtw/instructions_text.js
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: true
+    }
+
+    // HP block 
+    // change type to "wtw-passive-block" to run the passive waiting version
+    var wtw_HP_block = {
+        type: "wtw-active-block",
+        condition: "HP",
+        block_time: 1000 * 60 * 10,
+        maturation_value: 2,
+        iti: 500,
+        initialEarnings: function(){
+          var earnObj = jsPsych.data.get().filter({trial_type: 'wtw-active-block'}).select('totalEarnings')
+          var earnings = earnObj.values[0]
+          return(earnings[earnings.length - 1])
+        }
+    }
+
+    // store exp info 
+    jsPsych.data.addProperties({
+      workerId: workerId,
+      assignmentId: assignmentId,
+      hitId: hitId
+    })
+
+    // debriefing 
+    var debriefing = {
+      type: "instructions",
+      pages: function(){
+          var earnObj = jsPsych.data.get().filter({trial_type: 'wtw-active-block'}).select('totalEarnings')
+          var earnings = earnObj.values[1]
+          return(['<p style="color: white; font-size: 30px; line-height: 2">You earned a bonus of ' + earnings[earnings.length - 1] / 100 +
+      '&#36 in this decision-making game. You can close this webpage now.</p>'])
+        },
+      key_forward: "j",
+      key_backward: "f",
+      show_clickable_nav: false
+    }
+
+
+    /* finish connection with pavlovia.org */
+    var pavlovia_finish = {
+      type: "pavlovia",
+      command: "finish",
+      participantId: workerId
+    };
+
+    /* start the experiment. Comment the following chunk when testing locally */
+    jsPsych.init({
+      timeline: [pavlovia_init, change_colors, instructions_1, practice_1, instructions_2, practice_2, instructions_3, practice_3, instructions_4, practice_4, instructions_5, mid_quit_warning, wtw_LP_block, instructions_6, wtw_HP_block, debriefing, pavlovia_finish],
+      on_finish:function (){
+        document.body.innerHTML = '<p style="color: white; font-size: 30px; line-height: 2"> Uploading data now.</p>'
+        setTimeout(function(){document.body.innerHTML = '<p style="color: white; font-size: 30px; line-height: 2"> Data successfully uploaded. You can close the tab now.</p>'}, 5000)
+      }
+    });
+
+    /* test the experiment locally and disply the output at the end. Uncomment the following chunk when testing locally */
+    // jsPsych.init({
+    //   timeline: [change_colors, instructions_1, practice_1, instructions_2, practice_2, instructions_3, practice_3, instructions_4, practice_4, instructions_5, wtw_LP_block, instructions_6, wtw_HP_block, debriefing],
+    //   on_finish: function() {
+    //     jsPsych.data.displayData();
+    //   }
+    // });
+
+  </script>
+</html>
